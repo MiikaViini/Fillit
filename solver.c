@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 10:29:20 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/04 12:57:43 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:08:57 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@ int	*tetro_maker(char *str, int index)
 	square_x = 0;
 	k = 0;
 	tetro = (int *)malloc(sizeof(int ) * 8);
-	while (*(str + index) != '\0' )
+	while (str[index] != '\0' )
 	{
-		if (*(str + index) == '#')
+		if (str[index] == '#')
 		{
 			tetro[k++] = square_x;
 			tetro[k++] = square_y;
 		}
 		square_x++;
-		if (*(str + index) == '\n')
+		if (str[index] == '\n')
 		{
 			square_y++;
 			square_x = 0;
 		}
 		str++;
-		if ((*(str + index) == '\n' && *(str + index + 1) == '\n')
-			|| (*(str + index) == '\n' && *(str + index + 1) == '\0'))
+		if ((str[index] == '\n' && str[index + 1] == '\n')
+			|| (str[index] == '\n' && str[index + 1] == '\0'))
 			return (tetro);
 	}
 	return (0);
@@ -52,29 +52,34 @@ int	place_tetros(int **tetromino, int index)
 	char	**square;
 	int		tetro_i;
 	int		*newtetro;
+	int		x;
+	int		y;
 
 	sidelen = 4;
 	i = 0;
 	tetro_i = 0;
 	square = newmap(sidelen);
+	x = 0;
+	y = 0;
 	if (!square)
 		return (0);
 	newtetro = (int *)malloc(sizeof(int) * 8);
 	newtetro = check_start(tetromino[0]);
-	while (i < index)
+	while (0 < index)
 	{
-		while (check_collision(square[y][x], newtetro[i]) == 0)
+		if (check_collision(square, newtetro) == 0)
 		{
-			break ;
+			printf("empty you can try to put it here");
 		}
-		while (tetro_i < 6)
+		while (tetro_i < 8)
 		{
-			square[newtetro[tetro_i + 1]][newtetro[tetro_i]] = 'A';
+			square[newtetro[tetro_i + 1 + y]][newtetro[tetro_i + x]] = 'A';
 			tetro_i = tetro_i + 2;
 		}
+		index--;
 		i++;
 		tetro_i = 0;
-		newtetro = check_start(tetromino[i]);
+		//newtetro = check_start(tetromino[i]);
 	}
 	i = 0;
 	while (i < sidelen)
@@ -114,26 +119,22 @@ int	*check_start(int *tetromino)
 
 int	check_collision(char **square, int *tetromino)
 {
-	int	y;
-	int	x;
 	int	index;
+	int	*fresh;
+	int res;
 
-	y = 0;
-	x = 0;
 	index = 0;
-	while (tetromino[index + 1] > 0)
+	fresh = check_start(tetromino);
+	res = 0;
+	if (square[fresh[index + 1]][fresh[index]] == '.')
 	{
-		while (sidelen_y > 0)
+		while (square[fresh[index + 1]][fresh[index]] == '.' && index < 8)
 		{
-			if (square[y][x] != '.')
-				return (1);
-			x++;
-			sidelen_y--;
+			index += 2;
+			res++;
 		}
-		sidelen--;
-		y++;
 	}
-	return (0);
+	return (res);
 }
 
 char	**newmap(int sidelen)
@@ -177,7 +178,7 @@ void	*solution(char *argv)
 	error(2, fd);
 	read_bytes = read(fd, map, BUF_MAX);
 	map[read_bytes] = '\0';
-	while (*map != '\0')
+	while (map[index] != '\0')
 	{
 		tetromino[i] = tetro_maker(map, index);
 		index = index + 21;
