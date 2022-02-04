@@ -1,48 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/21 11:42:06 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/27 11:09:56 by mviinika         ###   ########.fr       */
+/*   Created: 2021/11/29 14:38:53 by mviinika          #+#    #+#             */
+/*   Updated: 2022/01/04 14:16:50 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "includes/libft.h"
 
-void	error(int argc, int fd)
+void	ft_putnbr(int n)
 {
-	if (argc != 2)
+	if (n < 0)
 	{
-		ft_putendl("usage: ./fillit <file>");
-		exit(1);
+		ft_putchar('-');
+		n = n * -1;
 	}
-
-	if (fd < 0)
+	if (n == -2147483648)
 	{
-		ft_putendl("error");
-		exit(1);
+		ft_putchar('2');
+		n = 147483648;
 	}
-}
-
-void	map_err(int valid_map)
-{
-	if (valid_map == FALSE)
+	if (n >= 10)
 	{
-		ft_putendl("error");
-		exit(1);
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
 	}
-}
-
-int	main(int argc, char **argv)
-{
-	int		valid_map;
-
-	error(argc, 1);
-	valid_map = map_validation(argv[1]);
-	map_err(valid_map);
-	solution(argv[1]);
-	return (0);
+	else
+	{
+		ft_putchar((char)n + '0');
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:40:00 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/26 09:41:26 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/03 12:45:52 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,20 @@
 # define BUF_MAX 1000
 # define TRUE 1
 # define FALSE 0
+# define VALID 1
+# define INVALID 0
 
 # include "./libft/includes/libft.h"
-# include "get_next_line.h"
 # include <fcntl.h>
+
+int		linecount(char *map);
+int		check_minos(char *piece);
+char	*four_times_four(char *map, int index);
+int		map_validation(char *file);
+void	error(int argc, int fd);
+void	map_err(int valid_map);
+void	*solution(char *argv);
+char	**newmap(int sidelen);
+int		*check_start(int *tetromino);
+
+#endif

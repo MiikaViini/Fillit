@@ -1,48 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/21 11:42:06 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/27 11:09:56 by mviinika         ###   ########.fr       */
+/*   Created: 2021/11/12 13:06:15 by mviinika          #+#    #+#             */
+/*   Updated: 2022/01/04 14:16:50 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "includes/libft.h"
 
-void	error(int argc, int fd)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	if (argc != 2)
+	while (n--)
 	{
-		ft_putendl("usage: ./fillit <file>");
-		exit(1);
+		if (*(unsigned char *)s1 != *(unsigned char *)s2)
+			return (*(unsigned char *)s1 - *(unsigned char *)s2);
+		s1++;
+		s2++;
 	}
-
-	if (fd < 0)
-	{
-		ft_putendl("error");
-		exit(1);
-	}
-}
-
-void	map_err(int valid_map)
-{
-	if (valid_map == FALSE)
-	{
-		ft_putendl("error");
-		exit(1);
-	}
-}
-
-int	main(int argc, char **argv)
-{
-	int		valid_map;
-
-	error(argc, 1);
-	valid_map = map_validation(argv[1]);
-	map_err(valid_map);
-	solution(argv[1]);
 	return (0);
 }
