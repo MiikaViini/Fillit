@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 10:29:20 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/04 09:40:43 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:57:43 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	*tetro_maker(char *str, int index)
 	return (0);
 }
 
-int	place_tetros(int **tetromino)
+int	place_tetros(int **tetromino, int index)
 {
 	int		sidelen;
 	int		i;
@@ -61,11 +61,22 @@ int	place_tetros(int **tetromino)
 		return (0);
 	newtetro = (int *)malloc(sizeof(int) * 8);
 	newtetro = check_start(tetromino[0]);
-	while (tetro_i < 8)
+	while (i < index)
 	{
-		square[newtetro[tetro_i + 1]][newtetro[tetro_i]] = 'A';
-		tetro_i = tetro_i + 2;
+		while (check_collision(square[y][x], newtetro[i]) == 0)
+		{
+			break ;
+		}
+		while (tetro_i < 6)
+		{
+			square[newtetro[tetro_i + 1]][newtetro[tetro_i]] = 'A';
+			tetro_i = tetro_i + 2;
+		}
+		i++;
+		tetro_i = 0;
+		newtetro = check_start(tetromino[i]);
 	}
+	i = 0;
 	while (i < sidelen)
 	{
 		printf("%s\n",square[i]);
@@ -101,6 +112,30 @@ int	*check_start(int *tetromino)
 	return (tetromino);
 }
 
+int	check_collision(char **square, int *tetromino)
+{
+	int	y;
+	int	x;
+	int	index;
+
+	y = 0;
+	x = 0;
+	index = 0;
+	while (tetromino[index + 1] > 0)
+	{
+		while (sidelen_y > 0)
+		{
+			if (square[y][x] != '.')
+				return (1);
+			x++;
+			sidelen_y--;
+		}
+		sidelen--;
+		y++;
+	}
+	return (0);
+}
+
 char	**newmap(int sidelen)
 {
 	char	**square;
@@ -125,7 +160,7 @@ void	*solution(char *argv)
 {
 	int		fd;
 	char	map[BUF_MAX];
-	int		res;
+	int		read_bytes;
 	int		*tetromino[26];
 	int		i;
 	int		k;
@@ -136,21 +171,21 @@ void	*solution(char *argv)
 	s = 0;
 	k = 0;
 	i = 0;
-	res = 0;
+	read_bytes = 0;
 	fd = 0;
 	fd = open(argv, fd);
 	error(2, fd);
-	res = read(fd, map, BUF_MAX);
-	map[res] = '\0';
+	read_bytes = read(fd, map, BUF_MAX);
+	map[read_bytes] = '\0';
 	while (*map != '\0')
 	{
 		tetromino[i] = tetro_maker(map, index);
 		index = index + 21;
 		i++;
 	}
-	k = place_tetros(tetromino);
+	k = place_tetros(tetromino, i);
 	//exit(1);
-	i = 0;
+	//i = 0;
 	//if (place_tetros(tetromino[i]) == 1)
 	//	printf("success");
 	return (NULL);

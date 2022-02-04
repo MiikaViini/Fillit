@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:40:00 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/03 12:45:52 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/04 11:00:45 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	map_err(int valid_map);
 void	*solution(char *argv);
 char	**newmap(int sidelen);
 int		*check_start(int *tetromino);
+int		check_collision(char **square, int sidelen);
 
 #endif

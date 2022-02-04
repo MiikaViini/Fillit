@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 10:29:20 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/04 10:08:25 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/04 09:40:43 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,24 +99,6 @@ int	*check_start(int *tetromino)
 		i = i + 2;
 	}
 	return (tetromino);
-}
-
-int	check_collision(char **square, int *newtetro, int sidelen))
-{
-	int	collision;
-	int	y;
-	int x;
-	collision = 0;
-	y = 0;
-	x = 0;
-	sidelen_y = sidelen;
-	while (sidelen > 0)
-	{
-		while (sidelen_y > 0)
-			if (square[y][x] != '.')
-				collision = 1;
-		sidelen--;
-	}
 }
 
 char	**newmap(int sidelen)
