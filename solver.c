@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 10:29:20 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/04 15:08:57 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:01:38 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	place_tetros(int **tetromino, int index)
 	int		*newtetro;
 	int		x;
 	int		y;
+	int		c;
 
 	sidelen = 4;
 	i = 0;
@@ -61,25 +62,39 @@ int	place_tetros(int **tetromino, int index)
 	square = newmap(sidelen);
 	x = 0;
 	y = 0;
+	c = 'A';
 	if (!square)
 		return (0);
 	newtetro = (int *)malloc(sizeof(int) * 8);
 	newtetro = check_start(tetromino[0]);
 	while (0 < index)
 	{
-		if (check_collision(square, newtetro) == 0)
+		while (check_collision(square, newtetro, x, y) != 4 && y < 4)
 		{
-			printf("empty you can try to put it here");
+			x++;
+			if (x == 3)
+			{
+				y++;
+				x = 0;
+			}
+			if (y == 3)
+				sidelen++;
 		}
 		while (tetro_i < 8)
 		{
-			square[newtetro[tetro_i + 1 + y]][newtetro[tetro_i + x]] = 'A';
+			square[newtetro[tetro_i + 1] + y][newtetro[tetro_i] + x] = c;
 			tetro_i = tetro_i + 2;
 		}
+
+		//printf("index%d", index);
+		if (index > 1)
+			i++;
+		c++;
 		index--;
-		i++;
 		tetro_i = 0;
-		//newtetro = check_start(tetromino[i]);
+		newtetro = check_start(tetromino[i]);
+		i = 0;
+
 	}
 	i = 0;
 	while (i < sidelen)
@@ -117,7 +132,7 @@ int	*check_start(int *tetromino)
 	return (tetromino);
 }
 
-int	check_collision(char **square, int *tetromino)
+int	check_collision(char **square, int *tetromino, int x, int y)
 {
 	int	index;
 	int	*fresh;
@@ -126,9 +141,10 @@ int	check_collision(char **square, int *tetromino)
 	index = 0;
 	fresh = check_start(tetromino);
 	res = 0;
-	if (square[fresh[index + 1]][fresh[index]] == '.')
+	if (square[fresh[index + 1] + y][fresh[index] + x] == '.')
 	{
-		while (square[fresh[index + 1]][fresh[index]] == '.' && index < 8)
+		res++;
+		while (square[fresh[index + 1] + y][fresh[index] + x] == '.' && index < 6)
 		{
 			index += 2;
 			res++;
@@ -184,6 +200,9 @@ void	*solution(char *argv)
 		index = index + 21;
 		i++;
 	}
+	//i = 0;
+	//while (i < 8)
+	//		printf("tetromino%d", tetromino[1][i++]);
 	k = place_tetros(tetromino, i);
 	//exit(1);
 	//i = 0;
