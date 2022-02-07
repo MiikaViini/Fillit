@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:40:00 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/04 19:53:32 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/07 09:18:01 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void	*solution(char *argv);
 char	**newmap(int sidelen);
 int		*check_start(int *tetromino);
 int		check_collision(char **square, int *tetromino, int x, int y);
+int		starting_square(int index);
+int		*save_tetro(int *tetromino);
 
 #endif

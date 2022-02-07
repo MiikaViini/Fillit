@@ -6,13 +6,14 @@
 #    By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 10:30:12 by mviinika          #+#    #+#              #
-#    Updated: 2022/01/27 19:31:26 by mviinika         ###   ########.fr        #
+#    Updated: 2022/02/07 15:50:23 by mviinika         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.c \
-	solver.c \
+	solve.c \
 	validation.c
+	error.c
 
 NAME = fillit
 

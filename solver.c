@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 10:29:20 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/04 20:01:38 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:20:13 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ int	place_tetros(int **tetromino, int index)
 	char	**square;
 	int		tetro_i;
 	int		*newtetro;
+	int		*current_tetro;
 	int		x;
 	int		y;
 	int		c;
 
-	sidelen = 4;
+	sidelen = starting_square(index);
 	i = 0;
 	tetro_i = 0;
 	square = newmap(sidelen);
@@ -69,32 +70,41 @@ int	place_tetros(int **tetromino, int index)
 	newtetro = check_start(tetromino[0]);
 	while (0 < index)
 	{
-		while (check_collision(square, newtetro, x, y) != 4 && y < 4)
+		current_tetro = save_tetro(tetromino[i]);
+		while (check_collision(square, newtetro, x, y) != 4)
 		{
-			x++;
-			if (x == 3)
+			square = newmap(sidelen);
+			while (tetro_i < 8)
 			{
-				y++;
-				x = 0;
+				x++;
+				current_tetro[tetro_i] += x;
+				if (current_tetro[tetro_i] == 3)
+				{
+					y++;
+					current_tetro[tetro_i + 1] += y;
+					x = 0;
+				}
+				tetro_i += 2;
 			}
-			if (y == 3)
-				sidelen++;
+			tetro_i = 0;
+			while (tetro_i < 8)
+			{
+				square[current_tetro[tetro_i + 1]][current_tetro[tetro_i]] = c;
+				tetro_i = tetro_i + 2;
+			}
+			tetro_i = 0;
 		}
 		while (tetro_i < 8)
 		{
-			square[newtetro[tetro_i + 1] + y][newtetro[tetro_i] + x] = c;
+			square[newtetro[tetro_i + 1]][newtetro[tetro_i]] = c;
 			tetro_i = tetro_i + 2;
 		}
-
-		//printf("index%d", index);
-		if (index > 1)
-			i++;
 		c++;
 		index--;
+		if (index > 0)
+			i++;
 		tetro_i = 0;
 		newtetro = check_start(tetromino[i]);
-		i = 0;
-
 	}
 	i = 0;
 	while (i < sidelen)
@@ -103,6 +113,37 @@ int	place_tetros(int **tetromino, int index)
 		i++;
 	}
 	return (1);
+}
+
+int	starting_square(int index)
+{
+	int	hash_count;
+	int	sidelen;
+
+	sidelen = 2;
+	hash_count = index * 4;
+	while (sidelen * sidelen < hash_count)
+		sidelen++;
+	return (sidelen);
+}
+
+int	*save_tetro(int *tetromino)
+{
+	int	*current_tetro;
+	int	index;
+
+	if (!tetromino)
+		return (0);
+	index = 0;
+	current_tetro = (int *)malloc(sizeof(int) * 8);
+	if (!current_tetro)
+		return (0);
+	while (index < 8)
+	{
+		current_tetro[index] = tetromino[index];
+		index++;
+	}
+	return (current_tetro);
 }
 
 int	*check_start(int *tetromino)
@@ -114,6 +155,8 @@ int	*check_start(int *tetromino)
 	i = 0;
 	x = tetromino[0];
 	y = tetromino[1];
+	if (x == 0 && y == 0)
+		return (tetromino);
 	while (i < 6)
 	{
 		if (x > tetromino[i + 2])
