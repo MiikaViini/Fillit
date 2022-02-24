@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:59:26 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/23 15:29:25 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/24 13:59:48 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,39 +132,21 @@ char	*tetro_file(char *file)
 	read_bytes = read(file_descriptor, buf, MAX_RB);
 	if (read_bytes < 20 || read_bytes > MAX_RB)
 		print_error();
-	tetros = ft_strdup(read_bytes);
+	tetros = ft_strndup(buf, read_bytes);
 	close(file_descriptor);
 	return (tetros);
 }
 /* Return if map is a valid or not. If valid
 ** we can pass the map forward to solution finder
 */
-int	map_validation(char *file)
-{
-	char	*map;
-	// int		read_bytes;
-	int		index;
+
 	// int		fd;
 	// char	*piece;
 
 	// fd = 0;
 	// fd = open(file, fd);
 	// error(2, fd);
-	index = 0;
-	map = tetro_file(file);
 	// read_bytes = read(fd, map, BUF_MAX);
 	// if (read_bytes < 20 || read_bytes > MAX_RB)
 	// 	return (INVALID);
 	// map[read_bytes + 1] = '\0';
-	while (map[index] != '\0')
-	{
-		piece = four_times_four(map, index);
-		if (check_minos(piece) == INVALID || hash_nl_count(piece) == INVALID
-			|| linecount(piece) == INVALID || map[read_bytes - 2] == '\n')
-			return (INVALID);
-		index = index + 21;
-		ft_strdel(&piece);
-	}
-	//close(fd);
-	return (VALID);
-}

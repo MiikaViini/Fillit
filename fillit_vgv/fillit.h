@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:40:00 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/23 20:52:12 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/24 13:06:20 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_tetro
 	char	letter;
 	char	**solution;
 	int		sidelen;
-	char	**square;
+	//char	**square;
 	int		t_amount;
 }				t_etro;
 
@@ -45,6 +45,8 @@ int		linecount(char *map);
 int		check_minos(char *piece);
 char	*four_times_four(char *map, int index);
 int		map_validation(char *file);
+int		check_hashs_and_newlines(char *piece);
+char	*tetro_file(char *file);
 
 void	print_error(void);
 void	print_usage(void);
@@ -53,17 +55,17 @@ void	print_usage(void);
 void	*solution(char *argv);
 char	**newmap(int sidelen);
 void	check_start(int *coordinate);
-int		check_colli(char **sqr, int *tetro, int sidelen);
+int		check_coll(char **sqr, int *tetro, int sidelen);
 int		starting_sqr(int index, t_etro *tetro);
 //int		*save_tetro(int *tetromino);
 //int		temp_start(int *coord);
-void	move_on_x_axis(int *coord, int *sidelen);
+void	move_on_x_axis(int *coord, int sidelen);
 void	move_on_y_axis(int *coord);
 void	remove_prev_tetro(int *coord, char **sqr);
 void	place_tetro(char **sqr, int *coord, char letter);
-char	**solver(t_etro *tetro, int index, t_answer answer);
-void	move_prev_tetro_or_expand(char **sqr, t_etro *tetro, int i);
-t_etro	tetro_maker(char *str, int index);
+char	**solver(t_etro *tetro);
+void	move_prev_tetro_or_expand(t_etro *tetro, int i);
+t_etro	tetro_maker(char *str);
 
 void	print_answer(char **solution, int sidelen);
 t_etro	*prepare_struct(char *filename);

@@ -6,39 +6,32 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 20:37:21 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/23 20:38:53 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/24 13:11:19 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	fu_valgrind(t_etro *tetromino)
-{
-	t_etro	*temp;
-	int		i;
+// void	fu_valgrind(t_etro *tetromino)
+// {
+// 	t_etro	*temp;
+// 	int		i;
+// 	size_t	loop;
 
-	temp = tetromino;
-	while (27--)
-	{
-		i = 0;
-		while (sidelen != i)
-		{
-			free(temp->solution[i]);
-			++i;
-		}
-		free(tetromino->solution);
-		i = 0;
-		while (sidelen != i)
-		{
-			free(temp->square[i]);
-			++i;
-		}
-		free(tetromino->square);
-		free(*temp);
-		++temp;
-	}
-	free(tetromino);
-}
+// 	loop = 27;
+// 	temp = tetromino;
+// 	while (loop--)
+// 	{
+// 		i = 0;
+// 		while (tetromino[0].sidelen != i)
+// 			free(temp->solution[i++]);
+// 		free(tetromino->solution);
+// 		i = 0;
+// 		free(&temp);
+// 		++temp;
+// 	}
+// 	free(tetromino);
+// }
 
 void	print_answer(char **solution, int sidelen)
 {
@@ -98,7 +91,7 @@ char	**newmap(int sidelen)
 	return (sqr);
 }
 
-int	check_colli(char **sqr, int *tetro, int sidelen)
+int	check_coll(char **sqr, int *tetro, int sidelen)
 {
 	int	index;
 	int	space;

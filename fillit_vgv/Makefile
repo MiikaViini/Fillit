@@ -6,7 +6,7 @@
 #    By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 10:30:12 by mviinika          #+#    #+#              #
-#    Updated: 2022/02/23 20:01:11 by mviinika         ###   ########.fr        #
+#    Updated: 2022/02/24 10:26:11 by mviinika         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ SRCS = main.c \
 	solver.c \
 	validation.c \
 	error.c \
+	preparation.c \
+	place_tetro.c \
+	helper_functions.c
 
 NAME = fillit
 
