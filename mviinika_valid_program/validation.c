@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:59:26 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/28 12:01:36 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:32:34 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	*four_times_four(char *map, int index)
 
 	piece_index = 0;
 	piece = ft_strnew(21);
+	if (map[index] == '\n')
+		index++;
 	while (map[index] != '\0')
 	{
 		piece[piece_index++] = map[index++];

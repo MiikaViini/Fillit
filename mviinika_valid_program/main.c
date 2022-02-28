@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:42:06 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/28 12:23:44 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:32:26 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	map_validation(char *file)
 	index = 0;
 	count = 0;
 	map = tetro_file(file);
-	while (map[index] != '\0')
+	while (map[index + 1] != '\0')
 	{
 		piece = four_times_four(map, index);
 		if (check_minos(piece) == INVALID
