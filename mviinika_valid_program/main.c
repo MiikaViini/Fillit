@@ -6,42 +6,53 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:42:06 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/28 11:28:00 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:23:44 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	error(int argc, int fd)
+int	map_validation(char *file)
 {
-	if (argc != 2)
-	{
-		ft_putendl("usage: ./fillit <file>");
-		exit(1);
-	}
-	if (fd < 0)
-	{
-		ft_putendl("error");
-		exit(1);
-	}
-}
+	char	*map;
+	int		index;
+	char	*piece;
+	int		count;
 
-void	map_err(int valid_map)
-{
-	if (valid_map == FALSE)
+	index = 0;
+	count = 0;
+	map = tetro_file(file);
+	while (map[index] != '\0')
 	{
-		ft_putendl("error");
-		exit(1);
+		piece = four_times_four(map, index);
+		if (check_minos(piece) == INVALID
+			|| check_hashs_and_newlines(piece) == INVALID
+			|| linecount(piece) == INVALID)
+		{
+			free(map);
+			free(piece);
+			return (INVALID);
+		}
+		free(piece);
+		index = index + 21;
 	}
+	free(map);
+	return (VALID);
 }
 
 int	main(int argc, char **argv)
 {
-	int		valid_map;
+	t_etro	*nimi;
+	char	**answer;
 
-	error(argc, 1);
-	valid_map = map_validation(argv[1]);
-	map_err(valid_map);
-	solution(argv[1]);
+	if (argc != 2)
+		print_usage();
+	if (map_validation(argv[1]) == INVALID)
+		print_error();
+	nimi = prepare_struct(argv[1]);
+	answer = solver(nimi);
+	print_answer(answer, nimi[0].sidelen);
+	ft_delar(answer, nimi[0].sidelen);
+	free(nimi);
 	return (0);
 }
