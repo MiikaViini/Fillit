@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:40:00 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/28 13:33:08 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/03/02 11:22:55 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 typedef struct s_tetro
 {
-	int		coord[8];
+	int		*coord[26];
 	char	letter;
 	char	**solution;
 	int		sidelen;
