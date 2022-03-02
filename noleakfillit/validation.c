@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:59:26 by mviinika          #+#    #+#             */
-/*   Updated: 2022/03/02 21:49:13 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/03/02 21:51:19 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	check_hashs(char *tetromino)
 	i = 0;
 	count = 0;
 	if (tetromino[0] != '.' && tetromino[0] != '#')
-	 	put_error();
+		put_error();
 	while (tetromino[i])
 	{
 		if (tetromino[i] == '#')
