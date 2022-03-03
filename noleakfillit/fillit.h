@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:41:59 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/02 15:56:23 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/03 09:01:50 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # define INVALID 0
 # define MAX_TETROS 26
 # define MAX_GRID_SIZE 225
-# define MAX_RB 550
 
 # include <string.h>
 # include "./libft/libft.h"

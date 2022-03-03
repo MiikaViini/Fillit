@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:59:26 by mviinika          #+#    #+#             */
-/*   Updated: 2022/03/02 21:51:19 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/03/03 09:02:48 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,9 @@ void	check_validity(char *filename)
 	char	buf[22];
 	int		r_value;
 	int		fd;
+	int		tetromino_count;
 
+	tetromino_count = 0;
 	fd = open(filename, O_RDONLY);
 	ft_memset(buf, '\0', 22);
 	r_value = (int)read(fd, buf, 21);
@@ -109,8 +111,9 @@ void	check_validity(char *filename)
 	{
 		tetro_validation(buf);
 		r_value = (int)read(fd, buf, 21);
+		tetromino_count++;
 	}
-	if (r_value != 0)
+	if (r_value != 0 || tetromino_count > MAX_TETROS)
 		put_error();
 	close(fd);
 }
