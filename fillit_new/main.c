@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 11:32:12 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/02 14:48:15 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/03/07 21:38:30 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	adjust_coords_to_sidelen(t_tetro *values)
 	tetromino_i = 0;
 	while ((values->coords)[tetromino_i])
 	{
-		coord_i = 0; 
+		coord_i = 0;
 		while (coord_i < 3)
 		{
 			if ((values->coords)[tetromino_i][coord_i] != 1)
