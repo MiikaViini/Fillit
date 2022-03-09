@@ -6,7 +6,7 @@
 #    By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 10:30:12 by mviinika          #+#    #+#              #
-#    Updated: 2022/03/02 14:43:03 by mviinika         ###   ########.fr        #
+#    Updated: 2022/03/09 11:44:52 by mviinika         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ NAME = fillit
 
 CC = clang
 
-FLAGS = -g -Wall -Werror -Wextra
- 
+FLAGS = -Wall -Werror -Wextra
+
 INCLUDES = -I . -I libft -L libft -lft
 
 all: $(NAME)
