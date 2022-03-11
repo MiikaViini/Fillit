@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: akoykka <koykka.atte@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/28 16:03:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/07 19:45:58 by mviinika         ###   ########.fr       */
+/*   Created: 2021/11/17 11:08:46 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/04 22:50:46 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	put_error(void)
+int	ft_strequ(char const *s1, char const *s2)
 {
-	ft_putstr_fd("error\n", 2);
-	exit(1);
-}
+	int	i;
 
-void	put_usage(void)
-{
-	ft_putstr_fd("usage: ./fillit <file>\n", 2);
-	exit(1);
+	i = 0;
+	if (!s1 || !s2)
+		return (0);
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] == s2[i])
+			++i;
+		else
+			return (0);
+	}
+	return (1);
 }

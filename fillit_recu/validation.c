@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:59:26 by mviinika          #+#    #+#             */
-/*   Updated: 2022/03/08 13:41:56 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/03/11 09:09:24 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,29 @@
 
 void	check_charecters_and_linecount(char *tetromino)
 {
-	int	c_count;
+	int	count;
 	int	line_count;
-	int	i;
 
-	i = 0;
-	c_count = 0;
+	count = 0;
 	line_count = 0;
-	while (tetromino[i])
+	while (*tetromino)
 	{
-		while (tetromino[i] == '.' || tetromino[i] == '#')
+		while ((*tetromino == '.' || *tetromino == '#') && *tetromino)
 		{
-			c_count++;
-			i++;
+			++count;
+			++tetromino;
 		}
-		c_count++;
-		if (c_count == 5 && tetromino[i] == '\n')
-			line_count++;
-		i++;
-		c_count = 0;
+		if (count == 4 && *tetromino == '\n')
+		{
+			++tetromino;
+			count = 0;
+			if (++line_count == 4)
+				return ;
+		}
+		else
+			put_error();
 	}
-	if (line_count != 4)
-		put_error();
+	put_error();
 }
 
 void	check_adjacency(char *tetromino)
