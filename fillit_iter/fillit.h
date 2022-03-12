@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:40:00 by mviinika          #+#    #+#             */
-/*   Updated: 2022/03/02 11:22:55 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/03/11 11:10:34 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define OUT_OF_BOUNDS -1
 # define MAX_RB 546
 
-# include "./libft/includes/libft.h"
+# include "./libft/libft.h"
 # include <fcntl.h>
 
 typedef struct s_tetro

@@ -5,11 +5,14 @@ RED='\033[1;7;31m'
 GREEN='\033[4;32m'
 YELLOW='\033[1;7;33m'
 ENDCOLOR='\033[0m'
-DIFF_INV=$(diff results/output_invalid results/answers_invalid)
-DIFF_VAL=$(diff results/output_valid results/answers_valid)
-NORM=$(diff results/norminette results/norminette_answer)
 
-.././fillit testfiles/invalid_files/invalid_file 2>&1 >results/output_invalid
+
+NORM=$(diff results/norminette results/norminette_answer)
+#
+# reading fillits results to output_invalid
+#
+../fillit 123 2>&1 >results/output_invalid
+.././fillit testfiles/invalid_files/invalid_file 2>&1 >>results/output_invalid
 .././fillit testfiles/invalid_files/invalid_piece 2>&1 >>results/output_invalid
 .././fillit testfiles/invalid_files/invalid_piece2 2>&1 >>results/output_invalid
 .././fillit testfiles/invalid_files/invalid_piece3 2>&1 >>results/output_invalid
@@ -29,7 +32,7 @@ NORM=$(diff results/norminette results/norminette_answer)
 .././fillit testfiles/invalid_files/invalid_pieces17 2>&1 >>results/output_invalid
 .././fillit testfiles/invalid_files/invalid_pieces18 2>&1 >>results/output_invalid
 .././fillit testfiles/invalid_files/invalid_toomany 2>&1 >>results/output_invalid
-
+DIFF_INV=$(diff results/output_invalid results/answers_invalid)
 printf "\n"
 if [ "$DIFF_INV"  != "" ]
 then
@@ -40,9 +43,13 @@ fi
 if [ "$DIFF_INV" == "" ]
 then
 	printf "${GREEN}Passed invalid tests${ENDCOLOR}\n"
+	rm results/output_invalid
 fi
 read
-.././fillit testfiles/valid_files/test_i 2>&1 >results/output_valid
+#
+# reading fillits results to output_valid
+#
+.././fillit testfiles/valid_files/test_i 2>&1 >>results/output_valid
 .././fillit testfiles/valid_files/test_L 2>&1 >>results/output_valid
 .././fillit testfiles/valid_files/test_L2 2>&1 >>results/output_valid
 .././fillit testfiles/valid_files/test_L3 2>&1 >>results/output_valid
@@ -62,7 +69,8 @@ read
 .././fillit testfiles/valid_files/test7 2>&1 >>results/output_valid
 .././fillit testfiles/valid_files/testI 2>&1 >>results/output_valid
 .././fillit testfiles/valid_files/speedster 2>&1 >>results/output_valid
-
+.././fillit testfiles/valid_files/test_bonus 2>&1 >>results/output_valid
+DIFF_VAL=$(diff results/output_valid results/answers_valid)
 norminette ..| grep Error > results/norminette
 
 
@@ -70,35 +78,50 @@ if [ "$DIFF_VAL"  != "" ]
 then
 	printf "${RED}Failed valid tests ${ENDCOLOR}\n"
 	printf "${DIFF_VAL}\n"
+	read
 fi
+
 if [ "$DIFF_VAL" == "" ]
 then
 	printf "${GREEN}Passed valid tests${ENDCOLOR}\n"
+	rm results/output_valid
+	read
 fi
-read
+
 if [ "$NORM"  != "" ]
 then
 	printf "${RED}Failed Norm tests ${ENDCOLOR}\n"
+	cat results/norminette
+	read
 fi
 
 if [ "$NORM" == "" ]
 then
 	printf "${GREEN}Passed Norm tests${ENDCOLOR}\n"
+	read
 fi
+
+printf "${YELLOW}Usage test${ENDCOLOR}\n"
+echo './fillit'
+../fillit
+echo './fillit 123 123'
+../fillit 123 123
 read
+
 printf "\n"
-printf "${YELLOW}Evaluation form test1${ENDCOLOR}\n"
+printf "${YELLOW}Evaluation form speedtest 1${ENDCOLOR}\n"
 printf "\n"
 { time .././fillit testfiles/valid_files/test1; }
 
 printf "\n"
 read
-printf "${YELLOW}Evaluation form test7${ENDCOLOR}\n"
+printf "${YELLOW}Evaluation form speedtest 7${ENDCOLOR}\n"
 printf "\n"
 { time .././fillit testfiles/valid_files/test7; }
 read
 
 printf "${RED}END OF TEST${ENDCOLOR}\n"
-#rm results/output
+
+
 
 
