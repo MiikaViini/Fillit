@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:42:06 by mviinika          #+#    #+#             */
-/*   Updated: 2022/02/28 15:32:26 by mviinika         ###   ########.fr       */
+/*   Updated: 2023/02/26 19:49:03 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ int	map_validation(char *file)
 	char	*map;
 	int		index;
 	char	*piece;
-	int		count;
 
 	index = 0;
-	count = 0;
 	map = tetro_file(file);
 	while (map[index + 1] != '\0')
 	{
@@ -42,17 +40,17 @@ int	map_validation(char *file)
 
 int	main(int argc, char **argv)
 {
-	t_etro	*nimi;
+	t_etro	*name;
 	char	**answer;
 
 	if (argc != 2)
 		print_usage();
 	if (map_validation(argv[1]) == INVALID)
 		print_error();
-	nimi = prepare_struct(argv[1]);
-	answer = solver(nimi);
-	print_answer(answer, nimi[0].sidelen);
-	ft_delar(answer, nimi[0].sidelen);
-	free(nimi);
+	name = prepare_struct(argv[1]);
+	answer = solver(name);
+	print_answer(answer, name[0].sidelen);
+	ft_delar(answer, name[0].sidelen);
+	free(name);
 	return (0);
 }

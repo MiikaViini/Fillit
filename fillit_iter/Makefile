@@ -6,7 +6,7 @@
 #    By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 10:30:12 by mviinika          #+#    #+#              #
-#    Updated: 2022/02/28 12:10:45 by mviinika         ###   ########.fr        #
+#    Updated: 2023/02/26 19:46:50 by mviinika         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ SRCS = main.c \
 
 NAME = fillit
 
-CC = clang
+CC = gcc
 
 FLAGS = -Wall -Werror -Wextra -g
 
-INCLUDES = -I . -I libft -L libft -lft
+INCLUDES = libft/libft.a
 
 all: $(NAME)
 

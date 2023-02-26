@@ -11,29 +11,21 @@ NORM=$(diff results/norminette results/norminette_answer)
 #
 # reading fillits results to output_invalid
 #
-../fillit 123 2>&1 >results/output_invalid
-.././fillit testfiles/invalid_files/invalid_file 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece2 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece3 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece4 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece5 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece6 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece7 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece8 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece9 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_piece10 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_pieces11 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_pieces12 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_pieces13 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_pieces14 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_pieces15 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_pieces16 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_pieces17 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_pieces18 2>&1 >>results/output_invalid
-.././fillit testfiles/invalid_files/invalid_toomany 2>&1 >>results/output_invalid
+ ../fillit 123 2>&1 >results/output_invalid
+for file in testfiles/invalid_files/*; do
+	clear
+	printf "${file}:\n"
+	printf "\n"
+	cat "$file"
+	printf "\n"
+	printf "Output of your fillit:\n\n"
+	.././fillit "$file"
+	.././fillit "$file" 2>&1 >>results/output_invalid
+	read
+done
+
 DIFF_INV=$(diff results/output_invalid results/answers_invalid)
-printf "\n"
+clear
 if [ "$DIFF_INV"  != "" ]
 then
 	printf "${RED}Failed invalid tests ${ENDCOLOR}\n"
@@ -49,44 +41,38 @@ read
 #
 # reading fillits results to output_valid
 #
-.././fillit testfiles/valid_files/test_i 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_L 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_L2 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_L3 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_L4 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_o 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_s 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_s2 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_s3 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_s4 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_subject 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_t 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_t2 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_t3 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_t4 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test-easy 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test1 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test7 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/testI 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/speedster 2>&1 >>results/output_valid
-.././fillit testfiles/valid_files/test_bonus 2>&1 >>results/output_valid
+
+for file in testfiles/valid_files/*; do
+	clear
+	printf "${file}:\n"
+	printf "\n"
+	cat "$file"
+	printf "\n"
+	printf "Output of your fillit:\n\n"
+	.././fillit "$file"
+	.././fillit "$file" 2>&1 >>results/output_valid
+	read
+done
 DIFF_VAL=$(diff results/output_valid results/answers_valid)
+
 norminette ..| grep Error > results/norminette
 
+clear
 
 if [ "$DIFF_VAL"  != "" ]
 then
 	printf "${RED}Failed valid tests ${ENDCOLOR}\n"
 	printf "${DIFF_VAL}\n"
-	read
 fi
 
 if [ "$DIFF_VAL" == "" ]
 then
 	printf "${GREEN}Passed valid tests${ENDCOLOR}\n"
-	rm results/output_valid
-	read
 fi
+
+read
+
+clear
 
 if [ "$NORM"  != "" ]
 then
@@ -120,7 +106,11 @@ printf "\n"
 { time .././fillit testfiles/valid_files/test7; }
 read
 
+clear
 printf "${RED}END OF TEST${ENDCOLOR}\n"
+# rm results/output_valid
+rm results/norminette
+read
 
 
 

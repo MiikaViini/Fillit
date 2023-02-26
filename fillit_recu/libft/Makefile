@@ -6,7 +6,7 @@
 #    By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 17:07:39 by akoykka           #+#    #+#              #
-#    Updated: 2022/03/02 13:18:53 by mviinika         ###   ########.fr        #
+#    Updated: 2023/02/26 19:53:06 by mviinika         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,13 +57,13 @@ OBJECTS = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o\
 	ft_lstdelone.o ft_lstdel.o\
 	ft_memrcpy.o ft_findtail.o ft_lstcount.o\
 
-INCLUDES = "libft.h"
+INCLUDES = libft.h
 
 
 all: $(NAME)
 
 $(NAME): 
-	@gcc -c -Wall -Wextra -Werror $(SRCS) -I $(INCLUDES)
+	@gcc -c -Wall -Wextra $(SRCS) $(INCLUDES)
 	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
 	
